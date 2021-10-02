@@ -1,0 +1,33 @@
+{% extends 'Extra/Base.htm' %}
+{% load static %}
+{% block title %}
+	Update Profile
+{% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+     {% load crispy_forms_tags %}
+     <div style="margin-top:90px;" class="card">
+         
+     
+	{% if Success %}
+		<span class="btn btn btn btn-success form-control " >{{ Success }}</span>
+	{% endif %}
+	{% if Error %}
+		<span class="btn btn btn btn-danger form-control " >{{ Error }}</span>
+	{% endif %}
+	<div class="card">
+	    
+	
+	<form method="post" enctype="multipart/form-data" >
+		{% csrf_token %}
+		{{ userform|crispy}}
+		{{ profileform|crispy }}<br />
+		<button class="btn btn btn btn-success form-control " >Save</button>
+	</form>
+	</div>
+	</div><br /><br />
+{% endif %}
+<div  style="margin-top:120px;"class="card">
+    
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'Extra/Base.htm' %}
+{% load static %}
+{% block title %}
+	{{ user }}
+{% endblock %}
+{% block content %}<br /><br /><br />
+<div class="card">
+	<a href="{{profile.profile.profilepic.url}}" ><img style="height:200px;width:200px;border-radius:50%;margin-left:60px;"  class="img-thumbnail img-circle"  src="{{ profile.profile.profilepic.url }}" ></a><br>
+	Name:<input value="{{profile.profile.fname }} {{ profile.profile.lname }}" readonly="readonly" class="form-control"> <br>
+	Username:<input value="{{ profile }}" readonly="readonly" class="form-control"> <br>
+	Email:<input value="{{ profile.email }}" readonly="readonly" class=" form-control"> <br>
+	Date Of Birth:<input value="{% if profile.profile.dateofbirth == None %} {% else %} {{profile.profile.dateofbirth}} {% endif %}" type="datetime" readonly="readonly" class="form-control"> <br>
+	Phone:<input value="{% if profile.profile.phone == None %} {% else %} {{profile.profile.phone}} {% endif %}" readonly="readonly" class="form-control"><br>
+	Bio:<textarea readonly="readonly" class="form-control" style="height:250px;"  >{{profile.profile.bio }}</textarea>
+	</div><br />
+	<div class="card">
+	    
+	
+{% endblock %}

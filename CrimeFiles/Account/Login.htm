@@ -1,0 +1,33 @@
+{% extends 'Extra/Base.htm' %}
+{% load static %}
+{% block title %}
+	Login
+{% endblock %}
+{% block content %}<br /><br />
+     <form method="post">
+		{% csrf_token %}
+		<!---- LOGIN PAGE ----->
+		<div class="c"   id="login_page" >
+		{% if messages %}
+			{% for message in messages %}
+				<br /><span {% if message.tags %} class="form-control btn alert-danger {{ message.tags }}"{% endif %}>{{ message }}</span>
+			<br />{% endfor %}
+		{% endif %}<br>
+		Username:<br>
+		<input class="form-control"  name="username" type="name" class="login" placeholder="Enter your username or email" required="required" style="" />
+		<br>
+		Password:<br>
+		<input class="form-control login"  name="password" type="password" oninput="see_span2()"   id="password2"  placeholder="Enter your password" required="required" />
+		<center><br /><button class="btn btn btn-primary form-control"  id="login_but" >LOGIN</button>
+	</form><hr class="clearfix pt-3" >
+	<div class="text-center font-italic" >
+		<a class="form-control btn btn-outline-info"  href="{% url 'account:register' %}" >Join Now</a><br>
+	</div><hr class="clearfix pb-1" >
+<form action="{# url 'password_reset' #}" >
+	<br><button style="outline:none;" id="forget" class="btn btn btn-info form-control " >Forgot Password</button>
+</form>
+</div><br />
+<div class="card">
+    
+
+{% endblock %}

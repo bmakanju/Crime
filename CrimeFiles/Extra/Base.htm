@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+  <meta name ="description" content ="We  help you get latest news and sport action all as it get out  ">
+<meta name ="keywords" content ="Blog, News, Sport, Football, Table Tennis, Wrestling, WWE">
+<meta name ="author" content ="Brilliant Makanju">
+  <!-- Site Metas -->
+  {% load static %}
+ 
+  <link rel="shortcut icon" href="{% static 'img/logo/crimeheist.png' %}" type="images/x-icon" />
+   <title>{% block title %}{% endblock %}</title>
+</head>
+<style type="text/css" media="all">
+    body{
+        background-color: #a5b5c5;
+        
+    }
+</style>
+    {% load static %}
+    <link rel="" href="{% static 'glyphicons-halflings-regular.svg' %}" />
+	<link rel="stylesheet" href="{% static 'css/bootstrap/dist/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static '/css/font-awesome.min.css' %}">
+	<script src="{% static 'css/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+	<script src="{% static 'js/jquery/dist/jquery.min.js' %}"></script>
+    <!--body>
+        {# block content #}
+            
+        {# endblock #}
+    </body-->
+  <body>
+    <!-- Navigation -->
+    <section>
+      <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
+        <a href="{% static 'img/logo/crimeheist.png' %}" class="navbar-brand">CrimeHeist</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav ml-auto">
+          <!-- TODO: add acitve changer in js to highlight the current page -->
+          <li class="nav-item"><a href="{% url 'crimepost:crimeall' %}" class="nav-link active">News</a></li>
+         <li class="nav-item">
+             <a class="nav-link"  href="{% url 'sport:sportnews' %}">
+                 Sport
+             </a>
+         </li>
+         <li class="nav-item">
+             <a class="nav-link" href="{% url 'blog:blog' %}">
+                 Blog
+             </a>
+         </li>
+        {% if user.is_superuser %}
+          <li class="nav-item">
+              <a class="nav-link" href="door">Dashboard</a>
+          </li>
+          {% endif %}
+          {% if user.is_authenticated %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account:setting' %}">
+                      Settings
+                  </a>
+              </li>
+              <li class="text-danger nav-item">
+                  <a class="text-danger nav-link" href="{% url 'account:logout' %}">
+                      Logout
+                  </a>
+              </li>
+          {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account:login' %}">
+                      Login
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account:register' %}">
+                      Signup
+                  </a>
+              </li>
+          {% endif %}
+          <!--li class="nav-item"><a href="{# url 'blog:category-listview' #}" class="nav-link">categories</a></li>
+          <li class="nav-item"><a href="{# url 'blog:tag-listview' #}" class="nav-link">Tags</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">About</a></li-->
+          
+          </ul>
+        </div>
+      </nav>
+    </section>
+    <!-- Navigation end -->
+    <div class="container-fluid top-margin">
+      {% block content %}
+      <body>
+          
+      </body>
+      {% endblock %}
+    </div>
+    <!-- Footer -->
+<div class ="d-flex justify-content-between">
+        <!--div class="row"-->
+          <div class="p-2 bd-highlight"-->
+                <form id="newsletter" accept-charset="utf-8">
+                    {% csrf_token %}
+                    <input style="margin-bottom:10px;" class="form-control" type="email" name="" id="newsletterinput" value="" required="required" />
+                    <button class="form-control btn btn-outline-primary" style=""  type="submit">Join NewsLetter</button>
+                </form><br />
+                <h5>
+                    Information
+                </h5>
+                <ul class="list-unstyled">
+                    <li>
+                        <a style="text-decoration:none;" class="text-secondary" href="{# url 'account:contactus' #}">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a style="text-decoration:none;" class="text-secondary" href="{% url 'account:About' %}">
+                            About Us
+                        </a>
+                    </li>
+                
+                </div>
+        <script type="text/javascript">
+$(document).on('submit','#newsletter', function(e){
+	e.preventDefault();
+	$.ajax({
+		type:"POST",
+		url:"{% url 'subscribers:newsletter' %}",
+		data:{
+			value:$("#newsletterinput").val(),
+			csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+		},
+		success:function(data){
+			alert(data)
+		}
+	});
+	document.querySelector("#newsletterinput").value = "";
+});
+</script>
+<!--footer class =" page-footer font-small blue pt-4">
+<!-- Footer Links ->
+<div class ="container-fluid text-center text-md-left ">
+<!-- Grid row ->
+<div class = "row" >
+<!-- Grid column ->
+<div class ="col-md-6 mt-md-0 mt-3" >
+<!-- Content ->
+	Financed And Owned By <a href="https://wa.me/+2349049099321" >Olanrewaju Ayomide AKA Boss Lady</a><br>
+	Developed By <a href="https://wa.me/+2349015573136" >Brilliant Makanju</a> 
+	in Partner with <a href="https://wa.me/+2348073866481" >Olayiwola Idowu akinkunmi (Warrior)</a>
+</div>
+<!-- Grid column ->
+<hr class ="clearfix w-100 d-md-none pb-3">
+<!-- Grid column ->
+<div class ="col-md-3 mb-md-0 mb-3" >
+<!-- Links ->
+<h5 class = "  text-uppercase">Contact Olanrewaju Ayomide For Advertisement</h5>
+<ul class = "list-unstyled">
+<li >
+<a href ="https://wa.me/+2349015573136">WhatsApp</a>
+</li >
+<li >
+</li>
+</ul>
+</div>
+<!-- Grid column -->
+<!-- Grid column ->
+<div class ="col-md-3 mb-md-0 mb-3" >
+<!-- Links -l->
+<h5 class = "text-uppercase">In Need of a website Contact Developers</h5>
+<ul class = "list-unstyled">
+<a href ="https://wa.me/+2349015573136"><i class= "fa fa-whatsapp" aria-hidden= "true"></i>WhatsApp</a>
+<div class="text-center" >
+	Or
+</div>
+<a href="https://wa.me/+2348073866481"><i class= "fa fa-whatsapp" aria-hidden= "true"></i>WhatsApp</a>
+</li>
+</ul>
+</div>
+<!-- Grid column ->
+</div>
+<!-- Grid row ->
+</div>
+<!-- Footer Links -->
+<!-- Copyright ->
+<div class ="footer-copyright text-center py-3" >
+	©2021 Copyright;
+
+</div>
+<!-- Copyright ->
+</footer >
+              <!-- TODO: add acitve changer in js to highlight the current page ->
+              <br />
+              <hr class ="clearfix w-100 d-md-none pb-3">
+              <!-- Grid column -->
+        <div class ="p-2 bd-highlight" >
+            <ul class="list-unstyled">
+              
+              <li class="nav-item"><a href="{% url 'crimepost:crimeall' %}" class="nav-link active">Home</a></li>
+              <li class="nav-item"><a href="{% url 'sport:sportnews' %}" class="nav-link">Sport</a></li>
+              <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
+              {% if user.is_authenticated %}
+              <li class="nav-item"><a href="{% url 'account:logout' %}" class="nav-link text-danger">Logout</a></li>
+              {% else %}
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account:register' %}">
+                      Join Now
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'account:login'%}">
+                      Login
+                  </a>
+              </li>
+              {% endif %}
+              
+            </ul>
+         </div>
+          </div>
+        <div class ="footer-copyright text-center " >
+            ©2021 Copyright;
+        </div>
+      <!-- Footer end -->
+   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>

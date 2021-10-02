@@ -1,0 +1,103 @@
+{% extends "Extra/Base.htm" %}
+{% block title %}
+	About CrimeHeist
+{% endblock %}
+{% block content %}
+<style type="text/css">
+.text{
+	color:white;
+	font-size:70px;
+	animation:ease-in-out labelexist 20s infinite;
+}
+
+@keyframes labelexist{
+	0%{
+		font-size:60px;
+	}
+	20%{
+		font-size:70px;
+		color:gray;
+	}
+	40%{
+		font-size:60px;
+	}
+	60%{
+		font-size:70px;
+		color:white;
+	}
+	80%{
+		font-size:60px;
+
+	}
+	100%{
+		font-size:70px;
+		color:lightgray;
+	}
+}
+
+.img-fluid{
+	height:50%;
+	width:100%;
+}
+
+a{
+	text-decoration:none;
+}
+a:hover{
+	text-decoration:none;
+	color:red;
+}
+
+@media(min-width:768px){
+			
+				#email{
+								font-size:0.49cm;
+				}
+				#whatsapp{
+								font-size:0.6cm;
+				}
+}
+</style>
+
+<div class="container" >
+<div class="row" >
+	<div class="col-md-7 " >
+<div class="bg-info card card-signin my-5 pb-5 mb-5 breadcrumb h3">
+  										
+	<span class="h2 text-light text-center" >GET YOUR SONG/ALBUMS UPLOADED/POSTED ON LEGEND</span>
+	With over 4 Million people using our platform daily to get the latest and trending songs, Legend is no doubt one of the best to get
+	your Song across to millions of music lovers.
+	We know it takes time for you to spread the word of your music But u Relax and Work with us We know what it takes to get your Song
+	everywhere, let’s work together – your Music
+	career will never be the same	</div>
+	</div>
+	<div class="col-md-5 h-25">
+	<div class="card card-header-pills my-5 h-100 h3 bg-primary">
+	<span class="h2 mb-4 text-warning text-center " >CONTACT US</span>
+	Contact us via any one of the means below on how to get your Song or Album posted on Legend and we will get back to you.<br>
+	<div class="form-control btn-outline-dark bg-success" >
+		<small>Send us a mail–</small> <a id="email" class="h3 btn btn-outline-dark text-info" href="https://Legenditzofixial@gmail.com">Legenditzofixial@gmail.com</a><br>
+		<small>Click to chat with us on Whatsapp-</small><a id="whatsapp" class="h3 btn btn-outline-dark text-warning" href="https://wa.me/+23408087463210" >08087463210</a><br>
+		<small>Call us-</small>08087463210<br>
+	</div>
+	</div></div>	
+	<div class="col-md-25" >
+	 <div class="card card-footer bg-warning h3" >					
+	<span class="h2 text-center text-secondary font-weight-bolder" >UPCOMING ARTISTE?</span>
+	HERE ARE SOME ADVICE FOR YOU<br>
+	As One of the best in  Music & Entertainment in
+	Nigeria, we can offer you some very good
+	advice that will change your Music career for
+	the better.
+	We have seen it all, we understand everything
+	about the Music industry</div>
+</div>
+	</div></div></div>
+</section>
+<!-- Footer Links -->
+<!-- Copyright -->
+<div class ="bg-info  footer-copyright text-center py-3" >
+	©2021 Copyright;
+</div>
+<!-- Copyright -->
+{% endblock %}

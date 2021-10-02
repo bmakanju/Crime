@@ -1,0 +1,239 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    Settings
+{% endblock %}
+{% block content %}<br /><br/>
+                     {% load crispy_forms_tags %}
+
+    <div class="container light-style flex-grow-1 container-p-y">
+
+    <h4 class="font-weight-bold py-3 mb-4">
+      Account settings
+    </h4>
+
+    <div class="card overflow-hidden">
+      <div class="row no-gutters row-bordered row-border-light">
+        <div class="col-md-3 pt-0">
+          <div class="list-group list-group-flush account-settings-links">
+            <a class="list-group-item list-group-item-action active" data-toggle="list" href="#account-general">General</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change password</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Info</a>
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-social-links">Social links</a>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="account-general">
+
+              <div class="card-body media align-items-center">
+                <img src="{{user.profile.profilepic.url}}" alt="" class="img-thumbnail d-block ui-w-80 " style="margin-left:85px;height:50%;width:50;">
+            
+              </div>
+              <hr class="border-light m-0">
+
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Username</label>
+                  <input readonly="" type="text" class="form-control mb-1" value="{{user}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Name</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.fname}} {{user.profile.lname}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">E-mail</label>
+                  <input readonly="" type="text" class="form-control mb-1" value="{{user.email}}">
+
+                </div>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" id="account-change-password">
+              <div class="card-body pb-2">
+                  <form action="{% url 'account:changepass' %}" method="post" accept-charset="utf-8">
+                      {% csrf_token %}
+                       {{form|crispy}}
+                <div class="mt-1 mb-1 text-danger alert-warning">
+                    Note:You will be logged out immediately password is changed
+                </div>
+                <div class="form-group">
+                    <button class="form-control btn btn-outline-success" type="submit">Change Password</button>
+                </form>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="account-info">
+              <div class="card-body pb-2">
+
+                <div class="form-group">
+                  <label class="form-label">Bio</label>
+                  <textarea readonly="" value="{{user.profile.bio}}" class="form-control" rows="5">{{user.profile.bio}}</textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Birthday</label>
+                  <input readonly="" type="text" class="form-control" value="{% if user.profile.dateofbirth == None %}{% else %}{{user.profile.dateofbirth}}{% endif %}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Country</label>
+                  <input readonly="" type="text" class="form-control" value="{% if user.profile.origin == None %}{% else %}{{user.profile.origin}}{% endif %}" />
+                </div>
+
+
+              </div>
+              <hr class="border-light m-0">
+              <div class="card-body pb-2">
+
+                <h6 class="mb-4">Contacts</h6>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input readonly="" type="text" class="form-control" value="{% if user.profile.phone == None %}{% else %}{{user.profile.phone}}{% endif %}">
+                </div>
+
+
+              </div>
+      
+            </div>
+            <div class="tab-pane fade" id="account-social-links">
+              <div class="card-body pb-2">
+
+                <div class="form-group">
+                  <label class="form-label">Twitter</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.bird}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Facebook</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.fb}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Google+</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.gb}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">LinkedIn</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.linkin}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Instagram</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.gram}}">
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     <form class="" action="{% url 'account:profileupdate' %}" method="get" accept-charset="utf-8">
+         <button class="form-control btn btn-primary" type="submit">Update Profile</button>
+     </form>
+    </div><br />
+
+
+  <style type="text/css" media="all">
+      body, card{
+    background: #a5b5c5;
+    margin-top:20px;
+}
+
+.ui-w-80 {
+    width: 80px !important;
+    height: auto;
+}
+
+.btn-default {
+    border-color: rgba(24,28,33,0.1);
+    background: rgba(0,0,0,0);
+    color: #4E5155;
+}
+
+label.btn {
+    margin-bottom: 0;
+}
+
+.btn-outline-primary {
+    border-color: #26B4FF;
+    background: transparent;
+    color: #26B4FF;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+.text-light {
+    color: #babbbc !important;
+}
+
+.btn-facebook {
+    border-color: rgba(0,0,0,0);
+    background: #3B5998;
+    color: #fff;
+}
+
+.btn-instagram {
+    border-color: rgba(0,0,0,0);
+    background: #000;
+    color: #fff;
+}
+
+.card {
+    background-clip: padding-box;
+    box-shadow: 0 1px 4px rgba(24,28,33,0.012);
+}
+
+.row-bordered {
+    overflow: hidden;
+}
+
+.account-settings-fileinput {
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+.account-settings-links .list-group-item.active {
+    font-weight: bold !important;
+}
+html:not(.dark-style) .account-settings-links .list-group-item.active {
+    background: transparent !important;
+}
+.account-settings-multiselect ~ .select2-container {
+    width: 100% !important;
+}
+.light-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+    color: #4e5155 !important;
+}
+.material-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24, 28, 33, 0.03) !important;
+}
+.material-style .account-settings-links .list-group-item.active {
+    color: #4e5155 !important;
+}
+.dark-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(255, 255, 255, 0.03) !important;
+}
+.dark-style .account-settings-links .list-group-item.active {
+    color: #fff !important;
+}
+.light-style .account-settings-links .list-group-item.active {
+    color: #4E5155 !important;
+}
+.light-style .account-settings-links .list-group-item {
+    padding: 0.85rem 1.5rem;
+    border-color: rgba(24,28,33,0.03) !important;
+}
+
+
+  </style>
+  <div class="card" style="background:;">
+      <div class="card">
+          
+      
+ 
+{% endblock %}

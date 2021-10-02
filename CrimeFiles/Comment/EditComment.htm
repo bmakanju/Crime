@@ -1,0 +1,23 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    Editing Comment
+{% endblock %}
+{% block content %}<br /><br /><br />
+    <div class="text-center">
+        <div class="card">
+        <form method="post" action="{% url 'blog:editcomment' pk=comment.pk %}" accept-charset="utf-8">
+            {% csrf_token %}
+            <input type="hidden" name="post" id="" value="{{comment.post.pk}}" />
+            <textarea placeholder="Comment Here..." name="content" class="form-control" id="bpost" rows="8" cols="49">{{comment.comments}}</textarea><br />
+            <button type="submit" class="form-control btn btn-outline-warning" ><span class="card bg-success">Comment</span></button>
+       </form>
+       </div>
+       <hr />
+       <form action="{% url 'blog:blogview' title=comment.post.btitle headline=comment.post.descr pk=comment.post.pk %}"  accept-charset="utf-8">
+           <button style="" class="form-control btn btn-outline-secondary" type="submit">Cancel</button>
+        </form>
+    </div>
+    <div class="card">
+        
+    
+{% endblock %}

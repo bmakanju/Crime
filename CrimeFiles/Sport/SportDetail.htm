@@ -1,0 +1,128 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    {{Sport.title}}
+{% endblock %}
+{% block content %}<br /><br /><br /><br />
+    <div class="card text-center">
+        <img class="card img-responsive img-thumbnail" src="{{Sport.feature_image.url}}"  alt="" />
+            <small style="margin-left:15px;color:red;">
+               <span class="fa fa-clock-o"></span>{{Sport.published|timesince}} ago </small>
+    </div>
+        <div class="" style="float:; margin-top:5px;" ><br />
+            {{Sport.content|safe}}
+        </div><hr class ="clearfix w-100 d-md-none pb-2" style="border-radius:12px;">
+        <hr />
+        <div class="">
+            <i style="float:left;font-size:40px;"  class="fa fa-eye" ><sub style="font-size:11px;" >{{Sport.views }}</sub></i><br />
+            {% if commentcount %}
+                <i style="float:left;font-size:40px;" class="fa fa-comment-o">
+                    <sub style="font-size:11px;">{{commentcount}}
+                    </sub>
+                </i>
+            {% endif %}
+        </div><br /><br /><hr /><br />
+    <div class="commet card-img-top">
+        {% for comment in comments %}
+            <a class="" href="{{comment.names.profile.profilepic.url}}">
+                <img class="img-thumbnail" src="{{comment.names.profile.profilepic.url}}" style="float:left;height:130px; width:98px; margin-right:7px;"   alt="" />
+                </a><a style="text-decoration:none;" class="text-secondary" href=
+                "{% url 'account:viewotherprofile' name=comment.names %}">View Profile</a><br />{{comment.names}}
+                <br />
+                <i style="font-size:10px;" class="fa fa-calendar">{{comment.time.date}}</i><i  style="font-size:10px;"class="fa fa-clock-o">{{comment.time.time}}</i><br>
+            <i class="fa fa-comment-o"></i>{{comment.content}}
+            <br /><br /><hr />
+            <hr />
+        {% endfor %}
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        setInterval(function(){
+            $.ajax({
+                type:"GET",
+                url:"{# url 'sport:sportcommentall' pk=Sport.pk #}",
+                success:function(response){
+                    $(".comment").empty();
+                    for (var key in response.comment)
+                    {
+                        var temp = "<div class='card'><br> By" +response.comment[key].names +"<br>" +"On:" + response.comment[key].time+ "<br>" +"Said:" + response.comment[key].content + "<button class='btn btn-outline-primary'><a class='form-control btn-outline-primary' style='text-decoration:none;' href="+"'{% url 'sport:seplyview' pk=Sport.pk %}'>" + "Reply</a></button>" +"</div>";
+                        $(".comment").append(temp);
+                        
+                    }
+                    /*$("#display").empty();
+                    for (var key in response.messsag){
+                    var texts = "<div class='card'>{% if messag.fuser == user %}<div class='card' style='float:right;'>"response.messag[key].fuser+"</div>{% endif %}You:"+response.messag[key].value + "</div><br>";
+                    $("#display").append(texts);
+                    }*/
+                }
+            });
+        }, 10000000);
+    });
+</script>
+        <!--form id="comments">
+            {% csrf_token %}
+            <input type="hidden" id="poste" value="{{Sport.pk}}" />
+            Comment <br />
+            <textarea required="required" class="form-control" id="content" rows="8" cols="45"></textarea>
+            <button class="form-control btn btn-outline-warning" >Comment</button>
+        </form-->
+        {% if user.is_authenticated %}
+        <div class="card">
+        <form   method="post" action="{% url 'sport:sportcomment' %}">
+            {% csrf_token %}
+            <input type="hidden" id="poste" name="post" value="{{Sport.pk}}" />
+            <textarea placeholder="Comment Here..." name="content" required="required" class="form-control" id="content" rows="8" cols="45"></textarea>
+            <button class="form-control btn btn-outline-warning" ><span class="card">Comment</span></button>
+        </form>
+        </div>
+         <script type="text/javascript">
+$(document).on('submit','#commentes', function(e){
+    e.preventDefault();
+        $.ajax({
+             type:"POST",
+             url:"{% url 'sport:sportcomment' %}",
+             data:{
+                 post:$("#poste").val();
+                 content:$("#content").val(),
+             csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+             },
+             success:function(data){
+                    alert(data)
+                }
+          });
+          document.querySelector("#content").value = "";
+      });
+</script>
+    {% else %}
+        Login or Signup to comment 
+    {% endif %}
+    <div class="card-img-top" >
+    {% for Sport in SportRelated %}
+        <a href={{Sport.feature_image.url}}><img class="img-thumbnail"   style="float:left;height:95px; width:95px; margin-right:10px;"   src="{{Sport.feature_image.url}}"   ></a>
+        <div class="" style="float:; margin-top:25px" >
+            <small style="margin-left:15px;color:red;" class="fa fa-clock-o">
+               {{Sport.published|timesince}} ago </small><br />
+            {{Sport.headline|safe|slice:"65"}}.....
+            <button style="margin-left:192px;" class="btn btn-outline-primary"><a style="text-decoration:none;color:rgb(233,120,50)" href="{% url 'crimepost:crimeview' title=Sport.title headline=Sport.headline pk=Sport.pk %}">Read More</a></button>
+        </div><hr class ="clearfix w-100 d-md-none pb-2" style="border-radius:12px;">
+    {% endfor %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+   	{% if page_obj.has_previous %}
+    <li class="page-item">
+		<a class="page-link" href="?page=1" aria-label="Previous">
+  			<span aria-hidden="true">&laquo;</span>
+		</a>
+    </li>
+    {% endif %}
+	
+	<li class="page-item" ><a class="page-link" >{{ page_obj.paginator.num_pages }}</a></li>
+	{% if page_obj.has_next %}
+    <li class="page-item">
+		<a class="page-link" href= "?page={{ page_obj.next_page_number }}" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+		</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav><br /><br />
+{% endblock %}

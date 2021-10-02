@@ -1,0 +1,46 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    {{News.title}}
+{% endblock %}
+{% block content %}<br /><br /><br /><br />
+    <div class="card text-center">
+        <img class="card img-responsive img-thumbnail" src="{{News.feature_image.url}}"  alt="" />
+            <small style="margin-left:15px;color:red;">
+               <span class="fa fa-clock-o"></span>{{News.published|timesince}} ago </small>
+    </div>
+        <div class="" style="float:; margin-top:5px;" ><br />
+            {{News.content|safe}}
+        </div><hr class ="clearfix w-100 d-md-none pb-2" style="border-radius:12px;">
+    </div>
+    <div class="card-img-top" >
+    {% for News in NewsRelated %}
+        <a href={{News.feature_image.url}}><img class="img-thumbnail"   style="float:left;height:95px; width:95px; margin-right:10px;"   src="{{News.feature_image.url}}"   ></a>
+        <div class="" style="float:; margin-top:25px" >
+            <small style="margin-left:15px;color:red;" class="fa fa-clock-o">
+               {{News.published|timesince}} ago </small><br />
+            {{News.headline|safe|slice:"65"}}.....
+            <button style="margin-left:192px;" class="btn btn-outline-primary"><a style="text-decoration:none;color:rgb(233,120,50)" href="{% url 'crimepost:crimeview' title=News.title headline=News.headline pk=News.pk %}">Read More</a></button>
+        </div><hr class ="clearfix w-100 d-md-none pb-2" style="border-radius:12px;">
+    {% endfor %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+   	{% if page_obj.has_previous %}
+    <li class="page-item">
+		<a class="page-link" href="?page=1" aria-label="Previous">
+  			<span aria-hidden="true">&laquo;</span>
+		</a>
+    </li>
+    {% endif %}
+	
+	<li class="page-item" ><a class="page-link" >{{ page_obj.paginator.num_pages }}</a></li>
+	{% if page_obj.has_next %}
+    <li class="page-item">
+		<a class="page-link" href= "?page={{ page_obj.next_page_number }}" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+		</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+  </div><br /><br />
+{% endblock %}

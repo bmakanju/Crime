@@ -1,0 +1,65 @@
+{% extends 'Extra/Base.htm' %}
+{% block content %}<br /><br /><br />
+  <div class="card-img-top" >
+    {% for News in News %}
+        <a href={{News.feature_image.url}}><img class="img-thumbnail"   style="float:left;height:130px; width:98px; margin-right:7px;"   src="{{News.feature_image}}"   ></a>
+        {% if user.is_authenticated %}
+        <div class="" style="float:;" >
+            <form id="save" method="post" accept-charset="utf-8">
+                {% csrf_token %}
+                <input type="hidden" id="savenews" value="{{News.pk}}" />
+                <button type="submit" style="width:57%; margin-left:;" class="btn btn-outline-success form-control">
+                <!--a class="" style="text-decoration:none;color:blue;" href="{# url 'crimepost:savenews'  name=News.title pk=News.pk #}"-->
+                    <i class="fa fa-save">
+                        Save for Later
+                    </i>
+                <!--/a-->
+                </button>
+            </form>
+        <script type="text/javascript">
+$(document).on('submit','#save', function(e){
+	e.preventDefault();
+	$.ajax({
+		type:"POST",
+		url:"{% url 'crimepost:savenews' %}",
+		data:{
+			value:$("#savenews").val(),
+			csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+		},
+		success:function(data){
+			alert(data)
+		}
+	});
+	document.querySelector("#values").value = "";
+});
+</script>
+{% endif %}
+            <small style=" margin-left:15px;color:red;">
+               {{News.published|timesince}} ago </small><br />
+            <small>{{News.title}}</small><br />
+            <i class="fa fa-eye">{{News.views}}</i>
+            <button style="margin-left:192px;" class="btn btn-outline-primary"><a style="text-decoration:none;color:rgb(233,120,50)" href="{% url 'crimepost:crimeview' title=News.title headline=News.headline pk=News.pk %}">Read More</a></button>
+        </div><hr class ="clearfix w-100 d-md-none pb-2" style="border-radius:12px;">
+    {% endfor %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+   	{% if page_obj.has_previous %}
+    <li class="page-item">
+		<a class="page-link" href="?page=1" aria-label="Previous">
+  			<span aria-hidden="true">&laquo;</span>
+		</a>
+    </li>
+    {% endif %}
+	
+	<li class="page-item" ><a class="page-link" >{{ page_obj.paginator.num_pages }}</a></li>
+	{% if page_obj.has_next %}
+    <li class="page-item">
+		<a class="page-link" href= "?page={{ page_obj.next_page_number }}" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+		</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+  </div><br /><br />
+{% endblock %}

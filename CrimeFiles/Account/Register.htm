@@ -1,0 +1,58 @@
+{% extends "Extra/Base.htm" %}
+{% block title %}
+Join Now
+{% endblock %}
+{% block content %}<br /><br />
+{% if messages %}
+    {% for message in messages %}
+        <br /><span {% if message.tags %} class="form-control btn alert-danger {{ message.tags }}"{% endif %}>
+            {{ message }}
+            </span>
+            <br />
+    {% endfor %}
+{% endif %}
+	<form cl method="post"  id="register" >
+		{% csrf_token %}
+		Username:<br>
+		<input class="form-control"  type="text" id="username" name="username"  required="required"  ><br>
+		Email:<br>
+		<input class="form-control"  type="email" id="email"  name="email"   required="required" ><br>
+		Password:<br>
+		<input class="form-control"  type="password" id="password"  name="password"   name="password" required="required"  ><br>
+		<input class="btn btn-outline-success form-control"  type="submit" value="Join">
+	</form><hr class="clearfix pd-3" >
+	<div class="text-center font-italic" >
+		<a class="form-control btn btn-outline-info"  href="{% url 'account:login' %}" >Login Now</a><br>
+	</div><br />
+	<div class="card">
+	    
+	
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+/*$(document).on('submit','#register', function(e){
+	e.preventDefault();
+	$.ajax({
+		type:"POST",
+		url:"{% url 'Register' %}",
+		data:{
+			username:$("#username").val(),
+			email:$("email").val(),
+			password:$("password").val(),
+			csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+		},
+		success:function(data){
+			if(data.status == "success"){
+				if(data.msg == "success"){
+					window.location.href = "/Login";
+					alert("Hi");
+				}
+			}
+		}
+	});
+});*/
+</script><br />
+<div class="card">
+    
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    Deleting Comment
+{% endblock %}
+{% block content %}<br /><br /><br /><br /><br />
+    <div class="text-center">
+        <h2 class="">
+            Do you want to &#x2326; this comment <br />
+        </h2>
+        <form class="" action="{% url 'blog:deletecomment1' pk=comment.pk %}" accept-charset="utf-8">
+           
+            <button style="width:50%;float:right;" class=" btn btn-outline-danger" type="submit">Delete</button>
+       </form>
+       <form action="{% url 'blog:blogview' title=comment.post.btitle headline=comment.post.descr pk=comment.post.pk %}"  accept-charset="utf-8">
+           <button style="width:50%;float:left;" class="form-control btn btn-outline-secondary" type="submit">Cancel</button>
+        </form>
+    </div>
+    <div class="card">
+        
+    
+{% endblock %}
