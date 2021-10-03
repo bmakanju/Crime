@@ -1,0 +1,71 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    Contact Us on Crimeheist
+{% endblock %}
+{% block content %}<br /><br /><br />
+<!--Contact form-->
+{% load crispy_forms_tags %}
+<h1 class="text-center">Contact </h1>
+<h4 class="text-center">Contact us directly if you have any questions </h4>
+<p class="text-center text-info">
+Please write your Email address and Message below if you have any questions.<br />
+One of our staff members will be happy to contact you directly and answer your questions as soon as possible.
+</p>
+{% if user.is_authenticated %}
+    <form class="message" method="post" accept-charset="utf-8">
+        <div class="card ">
+        {% csrf_token %}
+        <h6>
+            Message:
+        </h6>
+        <textarea required="required" class="form-control" name="message" id="message" rows="8" cols="40" placeholder="Message Gies Here"></textarea><br />
+        </div><br />
+             <button class="form-control btn btn-outline-primary" type="submit">Message</button>
+    </form>
+    <script type="text/javascript">
+    $(document).on('submit','.message', function(e){
+        e.preventDefault();
+        $.ajax({
+             type:"POST",
+             url:"{% url 'account:contactus' %}",
+             data:{
+                 message:$("#message").val(),
+             csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+             },
+             success:function(data){
+                    alert(data)
+                }
+          });
+          document.querySelector("#message").value = "";
+      });
+</script>
+{% else %}
+    <form class="message" method="post">
+        <div class="card">
+        {% csrf_token %}
+        <input placeholder="Email goes Here" required="required" class="form-control" type="email" id="email"/><br />
+        <textarea placeholder="Message Goes Here" required="required" class="form-control" name="" id="message" rows="8" cols="40"></textarea>
+        </div><br />
+        <button class="form-control btn btn-outline-primary" type="submit">Message</button>
+    </form>
+    <script type="text/javascript">
+    $(document).on('submit','.message', function(e){
+        e.preventDefault();
+        $.ajax({
+             type:"POST",
+             url:"{% url 'account:contactus' %}",
+             data:{
+                 email:$("#email").val(),
+                 message:$("#message").val(),
+             csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
+             },
+             success:function(data){
+                    alert(data)
+                }
+          });
+          document.querySelector("#email").value = "";
+          document.querySelector("#message").value = "";
+      });
+</script>
+{% endif %}<br />
+{% endblock %}

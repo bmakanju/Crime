@@ -125,6 +125,11 @@
      <form class="" action="{% url 'account:profileupdate' %}" method="get" accept-charset="utf-8">
          <button class="form-control btn btn-primary" type="submit">Update Profile</button>
      </form>
+     <div class="col-auto">
+         <form class="" action="{% url 'subscribers:unsub1' %}" method="get" >
+             <button class="form-control btn btn-outline-dark mt-1" type="submit">Unsubscribe</button>
+         </form>
+     </div>
     </div><br />
 
 
@@ -231,9 +236,7 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
 
   </style>
-  <div class="card" style="background:;">
-      <div class="card">
-          
+
       
  
 {% endblock %}

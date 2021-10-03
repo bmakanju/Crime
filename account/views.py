@@ -1,13 +1,55 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserForm, ProfileForm
+from .forms import ContactForm, UserForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views import generic
-from django.core.mail import send_mail
+from django.core.mail import send_mail, BadHeaderError
 from django.contrib import auth
 from django.contrib.auth.forms import PasswordChangeForm
+from subscribers.models import NewsLetter
 from django.http import HttpResponse
 import random
+#Contavt Us form
+def Contact(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            email = request.user.email
+            message = request.POST.get("message")
+            subject = "Message From CrimeHeist Contact us Form"
+            try:
+                send_mail(subject, message, email, ["Crimeheist@gmail.com"], fail_silently=False)
+                return HttpResponse("Your Message Have been sent over to CrimeHeist we get back to you as soon as possible.Thank You for been patient")
+            except BadHeaderError:
+                return HttpResponse("Invalid Response")
+        else:
+            email = request.POST.get("email")
+            message = request.POST.get("message")
+            subject = "Message From Crimeheist Contact us Form"
+            try:
+                send_mail(subject, message, email, ["Crimeheist@gmail.com"], fail_silently=True)
+                return HttpResponse("Your Message Have been sent over to CrimeHeist we get back to you as soon as possible.Thank You for been patient")
+            except BadHeaderError:
+                return HttpResponse("Invalid Response")
+                
+        #form = ContactForm(request.POST)
+        #if form.is_valid():
+            #email=form.cleaned_data['email_address']
+            #subject = "Website Inquiry"
+         #   body = {
+              #  'first_name' : form.cleaned_data['first_name'],
+         #       'last_name' : form.cleaned_data[ 'last_name'],
+             #   'email' : form.cleaned_data['email_address'],
+            #    'message' :form.cleaned_data['message'],
+          #  }
+        #    message = "\n".join(body.values())
+    else:
+        form = ContactForm()
+        context = {
+            "form":form
+        }
+        return render(request, "Contact.htm", context)
+
+
 #About Us Page
 class About(generic.TemplateView):
 	template_name = "About.htm"
@@ -136,8 +178,10 @@ def Register(request):
                 password
             )
             success.save()
-            subject = "Signed Up on ShopFlex"
-            message = "Thank you for signing up with CrimeHeist Enjoy all the service we provide and promise you the best "
+            newsletter = NewsLetter.objects.create(email=email)
+            newsletter.save()
+            subject = "Signed Up on CrimeHeist"
+            message = "Thank you for signing up with CrimeHeist. Enjoy all the service we provide and promise you the best.   Note:By Signing up with us you are automatically added to our newsletter to unsubscribe kindly login onto CrimeHeist and check the settings and click on the Unsubscribe button "
             from_user = "CrimeHeist@gmail.com"
             receiving_user = email
             send_mail(subject, message, from_user, [receiving_user], fail_silently=False,)

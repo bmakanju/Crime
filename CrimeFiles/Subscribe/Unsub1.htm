@@ -1,0 +1,27 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    Unsubscribe From Newsletter
+{% endblock %}
+{% block content %}<br /><br /><br />
+{% if user.is_authenticated %}
+     <div class="text-center ">
+         <h3 class="">
+             Do you want to Unsubscribe from Newsletter
+             <h5 class="text-center text-secondary">
+                 {{newletter.email}}
+             </h5>
+         </h3>
+         <div class=" text-center">
+             <form class="" action="{% url 'subscribers:unsub2' pk=newletter.pk %}">
+                 <button style="width:50%;float:right;" class= "btn btn-outline-danger" type="submit">
+                     Unsubscribe</button>
+               </form>
+               <form action="{% url 'account:setting' %}">
+                   <button class="btn btn-outline-dark" style="width:50%;float:left;" type="submit">Settings</button>
+               </form>
+         </div>
+     </div>
+     
+     <br /><br />
+{% endif %}
+{% endblock %}
