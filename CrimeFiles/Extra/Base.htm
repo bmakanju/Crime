@@ -38,7 +38,6 @@
     
 
     
-    <br /><br /><br />
     <section>
       <nav class="navbar navbar-dark bg-dark navbar-expand-md fixed-top navbar-light bg-light">
         <a href="{% static 'img/logo/crimeheist.png' %}" class="navbar-brand">CrimeHeist</a>
@@ -48,12 +47,111 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ml-auto">
           <!-- TODO: add acitve changer in js to highlight the current page -->
-          <li class="nav-item"><a href="{% url 'crimepost:crimeall' %}" class="nav-link">News</a></li>
-         <li class="nav-item">
-             <a class="nav-link"  href="{% url 'sport:sportnews' %}">
-                 Sport
-             </a>
-         </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            News
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <div class="cardbl bg-dark text-white">
+            <li><a class="dropdown-item" href="#"></a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </div>
+          </ul>
+        </li>
+     
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{% url 'sport:sportnews' %}" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+            Sport
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark " aria-labelledby="navbarDarkDropdownMenuLink">
+            <!--li><a class="dropdown-item" href="#"></a></li-->
+            <div class="card bg-dark text-white">
+                
+            
+            <li><a class="dropdown-item" href="#">
+                WWE
+            </a></li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    Tennis
+                </a>
+            </li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    Swimming
+                </a>
+            </li>
+            </div>
+            <!--li class="">
+                <a class="dropdown-item" href="#">
+                    Biking
+                </a>
+            </li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    
+                </a>
+            </li-->
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{% url 'sport:sportnews' %}" id="navbarDarkDropdownMenuLin" role="button" data-bs-toggle="dropdown" aria-expanded="">
+            Football
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLin">
+            <div class="cardbl bg-dark text-white">
+            <li><a class="dropdown-item" href="">
+                Premier League
+            </a></li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    Serie A
+                </a>
+            </li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    Ligue 1
+                </a>
+            </li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    Bundesliga
+                </a>
+            </li>
+            <li class="">
+                <a class="dropdown-item" href="#">
+                    La Liga
+                </a>
+            </li>
+
+            </div>
+            </ul>
+            </li>
+                <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Entertainment
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            <div class="cardbl bg-dark text-white">
+            <li><a class="dropdown-item" href="#"></a></li>
+            <li><a class="dropdown-item" href="#">
+                BBN
+            </a></li>
+            <li><a class="dropdown-item" href="#">Movie</a></li>
+              <li>
+                  <a class="dropdown-item" href="#">Music</a>
+              </li>
+              <li class="">
+                  <a class="dropdown-item" href="#">
+                      Trends
+                  </a>
+              </li>
+              </div>
+          </ul>
+        </li>
          <li class="nav-item">
              <a class="nav-link" href="{% url 'blog:blog' %}">
                  Blog
@@ -98,9 +196,7 @@
     <!-- Navigation end -->
     <div class="container-fluid top-margin">
       {% block content %}
-      <body>
-          
-      </body>
+      
       {% endblock %}
     </div>
     <!-- Footer -->

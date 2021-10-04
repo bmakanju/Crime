@@ -7,14 +7,14 @@ from ckeditor.fields import RichTextField
 
 
 #
-#Eomment Model
-class Eomment(models.Model):
+#Bomment Model
+class Bomment(models.Model):
     names = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     content = models.TextField(default="")
     time = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
-
-    post = models.ForeignKey('Entertain' , to_field="slug", on_delete=models.CASCADE, null=True)
+   
+    post = models.ForeignKey('Beauty' , to_field="slug", on_delete=models.CASCADE, null=True)
     class Meta:
         ordering = ["-pk"]
     
@@ -27,12 +27,12 @@ class Eomment(models.Model):
 #Category
 
 
-#Entertain Model
-class Entertain(models.Model):
+#Beauty Model
+class Beauty(models.Model):
     title = models.CharField(max_length=9999999)
     slug = models.SlugField(max_length=9999999, unique=True)
     #category = models.ForeignKey(Category, default="", to_field="category",on_delete=models.CASCADE)
-    bommentie = models.ForeignKey(Eomment, on_delete=models.SET_NULL, null=True, blank=True, related_name="commentes")
+    bommentie = models.ForeignKey(Bomment, on_delete=models.SET_NULL, null=True, blank=True, related_name="commentes")
     headline = models.CharField(max_length=999999999999)
     content = RichTextField()
     published = models.DateTimeField(auto_now_add=True)
@@ -49,9 +49,9 @@ class Entertain(models.Model):
     
 
 #Draft 
-class ReadLaterEntertain(models.Model):
+class ReadLaterBeauty(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE)
-    news = models.ForeignKey(Entertain, on_delete=models.CASCADE)
+    news = models.ForeignKey(Beauty, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.name.username

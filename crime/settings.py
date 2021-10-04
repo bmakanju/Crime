@@ -43,6 +43,8 @@ INSTALLED_APPS += [
     'crimepost.apps.CrimepostConfig',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
+    'beauty.apps.BeautyConfig',
+    'fashion.apps.FashionConfig',
     'sport.apps.SportConfig',
     'entertain.apps.EntertainConfig',
     'dashboard.apps.DashboardConfig',
