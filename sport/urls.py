@@ -1,8 +1,9 @@
 from django.urls import path, include
-from sport.views import Sports, SportView, SaveSport, ReadLater, SportComment, SportCommentAll, SeplyView, SportReply
+from sport.views import Sports, SportView, SaveSport, ReadLater, SportCategory1, SportComment, SportCommentAll, SeplyView, SportReply
 app_name = "sport"
 urlpatterns = [
-    path("Sport_News", Sports.as_view(), name="sportnews"),
+    path("Sport_News", Sports, name="sportnews"),
+    path("SportCate/<int:pk>/", SportCategory1, name="sportcate"),
     path("SportComment",SportComment, name="sportcomment"),
     path("SportReply",SportReply, name="sportreply"),
     path("SportCommentAll/<int:pk>", SportCommentAll, name="sportcommentall"),

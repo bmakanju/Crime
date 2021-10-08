@@ -2,9 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView, TemplateView
-from fashion.models import Fomment, Fashion,  ReadLaterFashion
+from fashion.models import Fomment, Fashion, ReadLaterFashion, FashionCate
 import random
-#
+#Replying Views to comment 
+def FashionCategory1(request, pk):
+    category = Fashion.objects.filter(category=pk)
+    paginator = Paginator(category, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Fashion":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Fashion/FashionCate.htm", context)
 
 #Getting All Cment for post
 def FashionCommentAll(request, pk):
@@ -59,12 +69,26 @@ def ReadLater(request):
     
 
 
-#View All Fashion
-class Fashions(ListView):
-    template_name = "Fashion/Fashion.htm"
-    paginate_by = 25
-    context_object_name = "Fashion"
-    queryset = Fashion.objects.all()
+#View All Fashion Fashion category
+def Fashions(request):
+    category = FashionCate.objects.all()
+    sports = Fashion.objects.all()
+    paginator = Paginator(sports, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Fashion":sports,
+        "category":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Fashion/Fashion.htm", context)
+
+
+#class Fashions(ListView):
+   # template_name = "Fashion/Fashion.htm"
+   # paginate_by = 25
+   # context_object_name = "Fashion"
+   # queryset = Fashion.objects.all()
 
 #Viewing A particular Fashion
 def FashionView(request, title, headline, pk):

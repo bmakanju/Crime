@@ -19,7 +19,7 @@ class Blog(models.Model):
      bmaster = models.ForeignKey(User,   related_name = "postauthor", on_delete = models.CASCADE)
      btitle = models.CharField(max_length = 255)
      descr = models.CharField(max_length = 1000)
-     bpic = models.FileField(upload_to = "static/img/blogpic/")
+     #bpic = models.FileField(upload_to = "static/img/blogpic/")
      #category = models.ForeignKey(Category,  related_name = "postcategory", on_delete = models.CASCADE)
      bpost = RichTextField()
      views = models.IntegerField(default = 0)

@@ -2,8 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView, TemplateView
-from sport.models import Like, Dislike, Love, Somment, Seply, Sport, Views, ReadLaterSport
+from sport.models import Like, Dislike, Love, Somment, Seply, Sport, Views, ReadLaterSport, SportCategory
 import random
+#Sport Category 
+def SportCategory1(request, pk):
+    category = Sport.objects.filter(category=pk)
+    paginator = Paginator(category, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Sport":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Sport/SportCate.htm", context)
+    
 #Replying Views to comment 
 def SportReply(request):
     print(request.user)
@@ -76,14 +88,26 @@ def ReadLater(request):
     }
     return render(request, "Sport/ReadLaterSport.htm", context)
     
-
+#Sport category
+def Sports(request):
+    category = SportCategory.objects.all()
+    sports = Sport.objects.all()
+    paginator = Paginator(sports, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Sport":sports,
+        "category":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Sport/Sport.htm", context)
 
 #View All Sport
-class Sports(ListView):
-    template_name = "Sport/Sport.htm"
-    paginate_by = 25
-    context_object_name = "Sport"
-    queryset = Sport.objects.all()
+#class Sports(ListView):
+   # template_name = "Sport/Sport.htm"
+   # paginate_by = 25
+#    context_object_name = "Sport"
+#    queryset = Sport.objects.all()
 
 #Viewing A particular Sport
 def SportView(request, title, headline, pk):

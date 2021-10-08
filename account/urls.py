@@ -1,9 +1,10 @@
 from django.urls import path, include
-from account.views import Contact, Logging, Register, Logout, ViewOtherProfile, Settings,PasswordUpdate, UpdateProfile, About#, ProfileView, UpdateProfile
+from account.views import Contact, Logging, Register, Logout, ViewOtherProfile, Settings,PasswordUpdate, UpdateProfile, About, ProfileCard#, ProfileView, UpdateProfile
 app_name = "account"
 urlpatterns = [
     path("Login", Logging, name="login"),
     path("Register", Register, name="register"),
+    path("ProfileCard", ProfileCard, name="card"),
     path("Settings", Settings, name="setting"),
     path("About", About.as_view(), name="About"),
     path("ChangePassword", PasswordUpdate, name="changepass"),

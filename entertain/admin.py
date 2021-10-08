@@ -1,9 +1,13 @@
 from django.contrib import admin
-from entertain.models import Eomment, Entertain, ReadLaterEntertain
+from entertain.models import Eomment, Entertain, ReadLaterEntertain, EntertainCate
 # Register your models here.
-admin.site.register(Entertain)
+class EntertainA(admin.ModelAdmin):
+    #search_by = ["title"]
+    list_display = ("title","headline","pk",)
+    #search_by = ("title", "headline")
+admin.site.register(Entertain, EntertainA)
 admin.site.register(Eomment)
-#admin.site.register()
+admin.site.register(EntertainCate)
 
 admin.site.register(ReadLaterEntertain)
 

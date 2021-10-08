@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}<br /><br /><br />
     <div class="card text-center">
-        <img style="height:250px" class="card img-responsive img-thumbnail" src="{{Blog.bpic.url}}"  alt="" />
+        <!--img style="height:250px" class="card img-responsive img-thumbnail" src="{{Blog.bpic.url}}"  alt="" /-->
             <small style="margin-left:15px;color:red;">
                <span class="fa fa-clock-o"></span>{{Blog.created|timesince}} ago </small>
     </div><br />
@@ -35,6 +35,7 @@ $(document).on('submit','.heart', function(e){
 			selector = document.querySelector("#likies")
 			if (response.liked == true){
 			    $("#hearts").css("color", "red");
+			    $("#hearts").addclass("fa fa-heart-o")
 			  //  $("#hearts").html("class='fa fa-heart-o'")
 			    $(".heartvalue").html(response.heartcount)
 			}
@@ -253,7 +254,7 @@ $(document).on('submit','.usercomment', function(e){
     {% endif %}
     <div class="card-img-top" >
     {% for Blog in BlogRelated %}
-        <a href={{Blog.bpic.url}}><img class="img-thumbnail"   style="float:left;height:95px; width:95px; margin-right:10px;"   src="{{Blog.bpic.url}}"   ></a>
+        <!--a href={{Blog.bpic.url}}><img class="img-thumbnail"   style="float:left;height:95px; width:95px; margin-right:10px;"   src="{{Blog.bpic.url}}"   ></a-->
         <div class="" style="float:; margin-top:25px" >
             <small style="margin-left:15px;color:red;" class="fa fa-clock-o">
                {{Blog.created|timesince}} ago </small><br />

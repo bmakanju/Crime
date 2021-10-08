@@ -6,7 +6,7 @@
 {% block content %}
 {% if user.is_authenticated %}
      {% load crispy_forms_tags %}
-     <div style="margin-top:90px;" class="card">
+     <div style="margin-top:90px;" class="">
          
      
 	{% if Success %}
@@ -15,8 +15,12 @@
 	{% if Error %}
 		<span class="btn btn btn btn-danger form-control " >{{ Error }}</span>
 	{% endif %}
-	<div class="card">
-	    
+	<div class=" ">
+	<style type="text/css" media="all">
+	    label{
+	        font-size: 0.5cm;
+	    }
+	</style>
 	
 	<form method="post" enctype="multipart/form-data" >
 		{% csrf_token %}

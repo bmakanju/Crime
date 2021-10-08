@@ -6,7 +6,7 @@ from django_countries.widgets import CountrySelectWidget
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields =  ("fname","lname","profilepic", "dateofbirth","phone", "bio")
+        fields =  ("fname","lname","profilepic", "dateofbirth","phone", "bio","origin","fb","bird", "gram","gb", "linkin")
 
 class UserForm(forms.ModelForm):
     class Meta:

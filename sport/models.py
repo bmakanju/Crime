@@ -87,7 +87,7 @@ class Sport(models.Model):
     content = RichTextField()
     published = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now = True)
-    feature_image = models.FileField(upload_to="static/img/sport/", default="")
+    #feature_image = models.FileField(upload_to="static/img/sport/", default="")
     views = models.IntegerField(default=0)
     likes = models.ManyToManyField(Like, blank=True, related_name="likes")
     dislike = models.ManyToManyField(Dislike, blank=True, related_name="dislike")

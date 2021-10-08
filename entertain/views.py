@@ -2,10 +2,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView, TemplateView
-from entertain.models import Eomment, Entertain, ReadLaterEntertain
+from entertain.models import Eomment, Entertain, ReadLaterEntertain, EntertainCate
 import random
 #Replying Views to comment 
-
+def EntertainCategory1(request, pk):
+    category = Entertain.objects.filter(category=pk)
+    paginator = Paginator(category, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Entertain":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Entertain/EntertainCate.htm", context)
 
 #Getting All Cment for post
 def EntertainCommentAll(request, pk):
@@ -60,12 +69,26 @@ def ReadLater(request):
     
 
 
-#View All Entertain
-class Entertains(ListView):
-    template_name = "Entertain/Entertain.htm"
-    paginate_by = 25
-    context_object_name = "Entertain"
-    queryset = Entertain.objects.all()
+#View All Entertain Entertain category
+def Entertains(request):
+    category = EntertainCate.objects.all()
+    sports = Entertain.objects.all()
+    paginator = Paginator(sports, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Entertain":sports,
+        "category":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Entertain/Entertain.htm", context)
+
+
+#class Entertains(ListView):
+   # template_name = "Entertain/Entertain.htm"
+   # paginate_by = 25
+   # context_object_name = "Entertain"
+   # queryset = Entertain.objects.all()
 
 #Viewing A particular Entertain
 def EntertainView(request, title, headline, pk):

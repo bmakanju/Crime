@@ -14,7 +14,7 @@ class Eomment(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
 
-    post = models.ForeignKey('Entertain' , to_field="slug", on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey('Entertain', on_delete=models.CASCADE, null=True)
     class Meta:
         ordering = ["-pk"]
     
@@ -25,19 +25,26 @@ class Eomment(models.Model):
 #Draft Model or Save for later
 
 #Category
-
+class EntertainCate(models.Model):
+    category = models.CharField(max_length=500)
+    
+    class Meta:
+        ordering = ["-pk"]
+    
+    def __str__(self):
+        return self.category
+    
 
 #Entertain Model
 class Entertain(models.Model):
     title = models.CharField(max_length=9999999)
-    slug = models.SlugField(max_length=9999999, unique=True)
-    #category = models.ForeignKey(Category, default="", to_field="category",on_delete=models.CASCADE)
+    category = models.ForeignKey(EntertainCate,on_delete=models.CASCADE, default='')
     bommentie = models.ForeignKey(Eomment, on_delete=models.SET_NULL, null=True, blank=True, related_name="commentes")
     headline = models.CharField(max_length=999999999999)
     content = RichTextField()
     published = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now = True)
-    feature_image = models.FileField(upload_to="static/img/sport/", default="")
+    #feature_image = models.FileField(upload_to="Entertain", default="")
     views = models.IntegerField(default=0)
     
     class Meta:

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.views.generic import ListView, TemplateView
-from crimepost.models import Like, Dislike, Love, Comment, Reply, News, Views, ReadLater
+from crimepost.models import Like, Dislike, Love, Comment, Reply, News, Views, ReadLater, CrimeCategory
 import random
 
 #ReadLater and also delete

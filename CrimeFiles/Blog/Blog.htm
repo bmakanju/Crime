@@ -5,7 +5,7 @@
 {% block content %}<br /><br /><br />
   <div class="card-img-top" >
     {% for Blog in Blog %}
-        <a href={{Blog.bpic.url}}><img class="img-thumbnail"   style="float:left;height:130px; width:98px; margin-right:7px;"   src="{{Blog.bpic}}"   ></a>
+        <!--a href={{Blog.bpic.url}}><img class="img-thumbnail"   style="float:left;height:130px; width:98px; margin-right:7px;"   src="{{Blog.bpic}}"   ></a-->
         {% if user.is_authenticated %}
         <div class="" style="float:;" >
             <!--form id="save" method="post" accept-charset="utf-8">

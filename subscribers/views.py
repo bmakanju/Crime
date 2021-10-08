@@ -24,8 +24,8 @@ def NewsLetters(request):
     if NewsLetter.objects.filter(email=newsletterinput).exists():
         return HttpResponse("Email Already Registered With Crimeheist")
     else:
-        news = NewsLetter(email=newsletterinput)
-        news.save()
+        news = NewsLetter.objects.create(email=newsletterinput)
+        
         return HttpResponse("Email Added To Crimeheist NewsLetter")
     
     

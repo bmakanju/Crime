@@ -26,7 +26,7 @@
             <div class="tab-pane fade active show" id="account-general">
 
               <div class="card-body media align-items-center">
-                <img src="{{user.profile.profilepic.url}}" alt="" class="img-thumbnail d-block ui-w-80 " style="margin-left:85px;height:50%;width:50;">
+                <!--img src="{{user.profile.profilepic.url}}" alt="" class="img-thumbnail d-block ui-w-80 " style="margin-left:85px;height:50%;width:50;"-->
             
               </div>
               <hr class="border-light m-0">
@@ -43,7 +43,42 @@
                 <div class="form-group">
                   <label class="form-label">E-mail</label>
                   <input readonly="" type="text" class="form-control mb-1" value="{{user.email}}">
-
+                         <div class="form-group">
+                  <label class="form-label">Bio</label>
+                  <textarea readonly="" value="{{user.profile.bio}}" class="form-control" rows="5">{{user.profile.bio}}</textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Birthday</label>
+                  <input readonly="" type="text" class="form-control" value="{% if user.profile.dateofbirth == None %}{% else %}{{user.profile.dateofbirth}}{% endif %}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Country</label>
+                  <input readonly="" type="text" class="form-control" value="{% if user.profile.origin == None %}{% else %}{{user.profile.origin}}{% endif %}" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input readonly="" type="text" class="form-control" value="{% if user.profile.phone == None %}{% else %}{{user.profile.phone}}{% endif %}">
+                </div>
+                                <div class="form-group">
+                  <label class="form-label">Twitter</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.bird}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Facebook</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.fb}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Google+</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.gb}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">LinkedIn</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.linkin}}">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Instagram</label>
+                  <input readonly="" type="text" class="form-control" value="{{user.profile.gram}}">
+                </div>
                 </div>
               </div>
 
@@ -61,6 +96,7 @@
                 </form>
                 </div>
               </div>
+              
             </div>
             <div class="tab-pane fade" id="account-info">
               <div class="card-body pb-2">
@@ -125,12 +161,45 @@
      <form class="" action="{% url 'account:profileupdate' %}" method="get" accept-charset="utf-8">
          <button class="form-control btn btn-primary" type="submit">Update Profile</button>
      </form>
-     <div class="col-auto">
-         <form class="" action="{% url 'subscribers:unsub1' %}" method="get" >
-             <button class="form-control btn btn-outline-dark mt-1" type="submit">Unsubscribe</button>
-         </form>
-     </div>
+     <button type="button" class="w-100 btn btn-outline-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenteredScrollable">
+         Change Password
+         </button>
     </div><br />
+    <div class="container-fluid top-margin">
+      
+      <article class="my-3" id="modal">
+		  <div class="bd-heading sticky-xl-top align-self-start mt-5 mb-3 mt-xl-0 mb-xl-2">
+
+		  </div>
+		
+		  <div>
+		<div class="modal fade" id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollableTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenteredScrollableTitle">Change Password</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		          
+                  <form action="{% url 'account:changepass' %}" method="post" accept-charset="utf-8">
+                      {% csrf_token %}
+                       {{form|crispy}}
+                <div class="mt-1 mb-1 text-danger alert-warning">
+                    Note:You will be logged out immediately password is changed
+                </div>
+                <div class="form-group">
+                    <button class="form-control btn btn-outline-success" type="submit">Change Password</button>
+                </form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+    </div>
+
 
 
   <style type="text/css" media="all">

@@ -63,19 +63,24 @@ class Comment(models.Model):
 #Draft Model or Save for later
 
 #Category
+class CrimeCategory(models.Model):
+    category = models.CharField(max_length=250)
+    
+    def __str__(self):
+        return self.category
 
 
 #News Model
 class News(models.Model):
     title = models.CharField(max_length=9999999)
     slug = models.SlugField(max_length=9999999, unique=True)
-    #category = models.ForeignKey(Category, default="", to_field="category",on_delete=models.CASCADE)
+    category = models.ForeignKey(CrimeCategory, default="", on_delete=models.CASCADE, blank=True)
     commentds = models.ForeignKey(Comment, on_delete=models.SET_NULL, null=True, blank=True, related_name="comment")
     headline = models.CharField(max_length=999999999999)
     content = RichTextField()
     published = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now = True)
-    feature_image = models.FileField(upload_to="static/img/news/", default="")
+    #feature_image = models.FileField(upload_to="static/img/news/", default="")
     views = models.IntegerField(default=0)
     likes = models.ManyToManyField(Like, blank=True, related_name="likes")
     dislike = models.ManyToManyField(Dislike, blank=True, related_name="dislike")

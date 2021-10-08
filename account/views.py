@@ -9,6 +9,11 @@ from django.contrib.auth.forms import PasswordChangeForm
 from subscribers.models import NewsLetter
 from django.http import HttpResponse
 import random
+
+#Card Profile 
+def ProfileCard(request):
+    return render(request, "DevCard.htm")
+
 #Contavt Us form
 def Contact(request):
     if request.method == 'POST':
@@ -17,7 +22,7 @@ def Contact(request):
             message = request.POST.get("message")
             subject = "Message From CrimeHeist Contact us Form"
             try:
-                send_mail(subject, message, email, ["Crimeheist@gmail.com"], fail_silently=False)
+                send_mail(subject, message, email, ["CrimeHeist@gmail.com"], fail_silently=False)
                 return HttpResponse("Your Message Have been sent over to CrimeHeist we get back to you as soon as possible.Thank You for been patient")
             except BadHeaderError:
                 return HttpResponse("Invalid Response")

@@ -1,0 +1,46 @@
+{% extends 'Extra/Base.htm' %}
+{% block title %}
+    Page Not Found
+{% endblock %}
+{% block content %}<br /><br /><br /><br />
+<style type="text/css" >
+.card{
+    font-size: .5cm;
+    transition: 1.5s;
+}
+.card:hover{
+    color:white;
+    background: black;
+}
+h1{
+    color:red;
+}
+</style>
+    <div class="text-center card" id="cards">
+        <h1>
+            404 Page Not Found
+        </h1>
+        <p>
+            Sorry But this Page you are requesting for is not located on this server
+        </p>
+        <div class="card">
+            <h4>
+                Problem Leading to this Includes
+            </h4>
+            <ul class="card">
+                <li>
+                    Trying to access a deleted Post
+                </li>
+                <li>
+                    Trying to access a deleted Comment
+                </li>
+                <li>
+                    The Server with this request may have been moved 
+                </li>
+            </ul>
+        </div>
+    </div><br /><br />
+    <div class="card">
+        
+    
+{% endblock %}

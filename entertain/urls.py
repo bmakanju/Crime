@@ -1,8 +1,9 @@
 from django.urls import path, include
-from entertain.views import Entertains, EntertainView, SaveEntertain, ReadLater, EntertainComment, EntertainCommentAll
+from entertain.views import Entertains, EntertainView, SaveEntertain, ReadLater, EntertainComment, EntertainCommentAll, EntertainCategory1
 app_name = "entertain"
 urlpatterns = [
-    path("Entertain_News", Entertains.as_view(), name="entertainnews"),
+    path("Entertain_News", Entertains, name="entertainnews"),
+    path("EntertainCate/<int:pk>/", EntertainCategory1, name="entertaincate"),
     path("EntertainComment",EntertainComment, name="entertaincomment"),
     #path("EntertainReply",EntertainReply, name="entertainreply"),
     path("EntertainCommentAll/<int:pk>", EntertainCommentAll, name="entertaincommentall"),
