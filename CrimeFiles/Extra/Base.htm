@@ -106,17 +106,6 @@
                       Logout
                   </a>
               </li>
-          {% else %}
-              <li class="nav-item">
-                  <a class="nav-link text-white" href="{% url 'account:login' %}">
-                      Login
-                  </a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-white" href="{% url 'account:register' %}">
-                      Signup
-                  </a>
-              </li>
           {% endif %}
           <!--li class=""><a href="{# url 'blog:category-listview' #}" class="text-white">categories</a></li>
           <li class=""><a href="{# url 'blog:tag-listview' #}" class="text-white">Tags</a></li>
@@ -246,17 +235,6 @@
               <li class=""><a href="{% url 'blog:blog' %}" class="nav-link text-white">Blog</a></li>
               {% if user.is_authenticated %}
               <li class=""><a href="{% url 'account:logout' %}" class="nav-link text-danger ">Logout</a></li>
-              {% else %}
-              <li class="">
-                  <a class="nav-link text-white" href="{% url 'account:register' %}">
-                      Join Now
-                  </a>
-              </li>
-              <li class="">
-                  <a class="nav-link text-white" href="{% url 'account:login'%}">
-                      Login
-                  </a>
-              </li>
               {% endif %}
           </ul>
         </div>

@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from .forms import ContactForm, UserForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views import generic
-from django.core.mail import send_mail, BadHeaderError
 from django.contrib import auth
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from subscribers.models import NewsLetter
 from django.http import HttpResponse
-import random
+
 
 #Card Profile 
 def ProfileCard(request):
@@ -129,14 +129,15 @@ def Logout(request):
 #Login View
 def Logging(request):
     if request.user.is_authenticated:
-        return redirect('sport:sport')
+        return redirect('sport:sportnews')
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = auth.authenticate(request, username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            return redirect('/')
+        usernam = request.POST.get("username")
+        passwor = request.POST.get("password")
+        users = auth.authenticate(request, username=usernam, password=passwor)
+
+        if users is not None:
+            login(request, users)
+            return redirect('sport:sportnews')
         else:
             messages.info(request, "Invalid Credatials")
             return render(request, "Account/Login.htm")
@@ -148,7 +149,7 @@ def Logging(request):
 #Registration view
 def Register(request):
     if request.user.is_authenticated:
-        return redirect('sport:sport')
+        return redirect('sport:sportnews')
     if request.method == "POST":
         username = request.POST.get("username")
         email = request.POST.get("email")
@@ -172,6 +173,7 @@ def Register(request):
             message = "Thank you for signing up with CrimeHeist. Enjoy all the service we provide and promise you the best.   Note:By Signing up with us you are automatically added to our newsletter to unsubscribe kindly login onto CrimeHeist and check the settings and click on the Unsubscribe button "
             from_user = "CrimeHeist@gmail.com"
             receiving_user = email
+           # login(request, user)
             return redirect('account:login')
     else:
         return render(request, "Account/Register.htm")
