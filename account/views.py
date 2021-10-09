@@ -17,25 +17,8 @@ def ProfileCard(request):
 #Contavt Us form
 def Contact(request):
     if request.method == 'POST':
-        if request.user.is_authenticated:
-            email = request.user.email
-            message = request.POST.get("message")
-            subject = "Message From CrimeHeist Contact us Form"
-            try:
-                send_mail(subject, message, email, ["CrimeHeist@gmail.com"], fail_silently=False)
-                return HttpResponse("Your Message Have been sent over to CrimeHeist we get back to you as soon as possible.Thank You for been patient")
-            except BadHeaderError:
-                return HttpResponse("Invalid Response")
-        else:
-            email = request.POST.get("email")
-            message = request.POST.get("message")
-            subject = "Message From Crimeheist Contact us Form"
-            try:
-                send_mail(subject, message, email, ["Crimeheist@gmail.com"], fail_silently=True)
-                return HttpResponse("Your Message Have been sent over to CrimeHeist we get back to you as soon as possible.Thank You for been patient")
-            except BadHeaderError:
-                return HttpResponse("Invalid Response")
-                
+        return HttpResponse("Your Message Have been sent over to CrimeHeist we get back to you as soon as possible.Thank You for been patient")
+            
         #form = ContactForm(request.POST)
         #if form.is_valid():
             #email=form.cleaned_data['email_address']
@@ -189,7 +172,6 @@ def Register(request):
             message = "Thank you for signing up with CrimeHeist. Enjoy all the service we provide and promise you the best.   Note:By Signing up with us you are automatically added to our newsletter to unsubscribe kindly login onto CrimeHeist and check the settings and click on the Unsubscribe button "
             from_user = "CrimeHeist@gmail.com"
             receiving_user = email
-            send_mail(subject, message, from_user, [receiving_user], fail_silently=False,)
             return redirect('account:login')
     else:
         return render(request, "Account/Register.htm")

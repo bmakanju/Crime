@@ -54,7 +54,7 @@ INSTALLED_APPS += [
 INSTALLED_APPS +=[
     'crispy_forms',
     'ckeditor',
-    'html5lib',
+    'markdown',
 ]
 
 INSTALLED_APPS + [
@@ -156,8 +156,8 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#CSRF_COOKIE_SECURE = True #to avoid transmitting the CSRF cookie over HTTP accidentally.
-#SESSION_COOKIE_SECURE = True #to avoid transmitting the session cookie over HTTP accidentally.
+CSRF_COOKIE_SECURE = True #to avoid transmitting the CSRF cookie over HTTP accidentally.
+SESSION_COOKIE_SECURE = True #to avoid transmitting the session cookie over HTTP accidentally.
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
