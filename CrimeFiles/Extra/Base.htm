@@ -106,6 +106,13 @@
                       Logout
                   </a>
               </li>
+          {% else %}
+              <li class="nav-item">
+                  <a class="nav-link " href="{% url 'account:login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="Register">Sign Up</a>
+              </li>
           {% endif %}
           <!--li class=""><a href="{# url 'blog:category-listview' #}" class="text-white">categories</a></li>
           <li class=""><a href="{# url 'blog:tag-listview' #}" class="text-white">Tags</a></li>
@@ -130,34 +137,34 @@
 <footer class="bg-dark text-center text-white">
   <!-- Grid container -->
   <div class="container p-4">
-    <!-- Section: Social media -->
+    <!-- Section: Social media ->
     <section class="mb-4">
-      <!-- Facebook -->
+      <!-- Facebook ->
       <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
         ><i class="fa fa-facebook"></i
       ></a>
 
-      <!-- Twitter -->
+      <!-- Twitter ->
       <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
         ><i class="fa fa-twitter"></i
       ></a>
 
-      <!-- Google -->
+      <!-- Google ->
       <a class="btn btn-outline-light btn-floating m-1" href="https://CrimeHeist@gmail.com" role="button"
         ><i class="fa fa-google"></i
       ></a>
 
-      <!-- Instagram -->
+      <!-- Instagram ->
       <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
         ><i class="fa fa-instagram"></i
       ></a>
 
-      <!-- Linkedin -->
+      <!-- Linkedin ->
       <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
         ><i class="fa fa-linkedin"></i
       ></a>
 
-      <!-- Github -->
+      <!-- Github ->
       <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
         ><i class="fa fa-github"></i
       ></a>
@@ -197,13 +204,15 @@
         <!--Grid row-->
     </section>
     <!-- Section: Form -->
-
+<div class="container-md card-dark">
+				<img style="width:70%;height:;border-radius:5%;" class="img-rounded" src="{% static 'img/logo/crimeheist.png' %}" alt="CrimeHeist" /><br><br><br>
+</div>
     <!-- Section: Text -->
     <section class="mb-3">
       <p>
         Here on CrimeHeist we provide you with latest News, Education, Beauty, Entertainment, Fashion) and Sport(Football, Wrestling, Tennis, Swimming) Updates <!--Entertainment, Beauty Updates <!-trends, news, sport action, beauty, fashion and entertainment --> all in one on our Website click here to 
         
-        <div class="column--">
+        <div class="container-md">
             <a class="btn btn-outline-light " href="{% url 'account:About' %}">Read more</a>
         </div>
       </p>
@@ -235,6 +244,13 @@
               <li class=""><a href="{% url 'blog:blog' %}" class="nav-link text-white">Blog</a></li>
               {% if user.is_authenticated %}
               <li class=""><a href="{% url 'account:logout' %}" class="nav-link text-danger ">Logout</a></li>
+              {% else %}
+              <li class="">
+                  <a class="nav-link text-white" href="Login">Login</a>
+              </li>
+              <li class="">
+                  <a class="nav-link text-white" href="Register">Join Now</a>
+              </li>
               {% endif %}
           </ul>
         </div>
@@ -331,9 +347,9 @@ $(document).on('submit','.newletter', function(e){
 });
 </script>
   <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    ©2021 Copyright:
-    <a class="nav-link text-white" href="https://crimeheist.herokuapp.com">CrimeHeist</a>
+  <div class="text-center pb-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      
+    ©2021 Copyright: <a class="nav-link text-white" href="https://crimeheist.pythonanywhere.com">CrimeHeist</a>
   </div>
   <!-- Copyright -->
 </footer>

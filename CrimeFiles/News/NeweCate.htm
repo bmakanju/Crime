@@ -1,36 +1,30 @@
 {% extends 'Extra/Base.htm' %}
+{% block title %}
+    News News
+{% endblock %}
 {% block content %}<br /><br /><br />
-      <div class="container text-center category">
-      {% for category in category %}
-          <button class="bg-dark btn btn-outline-primary" type="submit">
-              <a style="text-decoration:none;" class="text-white" href="{% url 'crimepost:crimecate' pk=category.pk %}">
-                  {{category.category}}
-              </a>
-          </button>
-      {% endfor %}
-      </div><br />
   <div class="card-img-top" >
     {% for News in News %}
-        <!--a href={{News.feature_image.url}}><img class="img-thumbnail"   style="float:left;height:130px; width:98px; margin-right:7px;"   src="{{News.feature_image}}"   ></a-->
+        <!--a href={{News.feature_image.url}}><img class="img-thumbnail"   style="float:left;height:130px; width:98px; margin-right:7px;"   src="{{News.feature_image.url}}"   ></a-->
         {% if user.is_authenticated %}
         <div class="" style="float:;" >
-            <form id="save" method="post" accept-charset="utf-8">
+            <!--form id="save" method="post" accept-charset="utf-8">
                 {% csrf_token %}
                 <input type="hidden" id="savenews" value="{{News.pk}}" />
                 <button type="submit" style="width:57%; margin-left:;" class="btn btn-outline-success form-control">
-                <!--a class="" style="text-decoration:none;color:blue;" href="{# url 'crimepost:savenews'  name=News.title pk=News.pk #}"-->
+                <!--a class="" style="text-decoration:none;color:blue;" href="{# url 'crimepost:savenews'  name=News.title pk=News.pk #}"->
                     <i class="fa fa-save">
                         Save for Later
                     </i>
-                <!--/a-->
+                <!--/a-
                 </button>
-            </form>
+            </form->
         <script type="text/javascript">
 $(document).on('submit','#save', function(e){
 	e.preventDefault();
 	$.ajax({
 		type:"POST",
-		url:"{% url 'crimepost:savenews' %}",
+		url:"{# url 'crimepost:savenews' #}",
 		data:{
 			value:$("#savenews").val(),
 			csrfmiddlewaretoken:$("input[name=csrfmiddlewaretoken]").val(),
@@ -41,7 +35,7 @@ $(document).on('submit','#save', function(e){
 	});
 	document.querySelector("#values").value = "";
 });
-</script>
+</script-->
 {% endif %}
             <small style=" margin-left:15px;color:red;">
                {{News.published|timesince}} ago </small><br />

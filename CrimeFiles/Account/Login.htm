@@ -4,10 +4,10 @@
 	Login
 {% endblock %}
 {% block content %}<br /><br />
-     <form method="post">
+     <form class="container" method="post">
 		{% csrf_token %}
 		<!---- LOGIN PAGE ----->
-		<div class="c"   id="login_page" >
+		<div class="container"   id="login_page" >
 		{% if messages %}
 			{% for message in messages %}
 				<br /><span {% if message.tags %} class="form-control btn alert-danger {{ message.tags }}"{% endif %}>{{ message }}</span>
@@ -18,9 +18,12 @@
 		<br>
 		Password:<br>
 		<input class="form-control login"  name="password" type="password" placeholder="Enter your password" required="required" />
-		<center><br /><button class="btn btn btn-primary form-control"  id="login_but" >LOGIN</button>
+		<center><br /><button class="form-control btn btn-outline-primary"  id="login_but" >LOGIN</button>
 	</form><hr class="clearfix pt-3" >
-	<hr class="clearfix pb-1" >
+	<form class="container" action="Register" accept-charset="utf-8">
+	    <button class="form-control btn btn-outline-success">Join Now</button>
+	    
+	</form><hr class="clearfix pb-1" >
 </div><br />
 <div class="card">
     

@@ -6,7 +6,16 @@ from crimepost.models import Like, Dislike, Love, Comment, Reply, News, Views, R
 import random
 
 #ReadLater and also delete
-
+def NewsCategory1(request, pk):
+    category = News.objects.filter(category=pk)
+    paginator = Paginator(category, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "News":category,
+        "page_obj":page_obj
+    }
+    return render(request, "News/NeweCate.htm", context)
     
     
 def SaveNews(request):
@@ -36,11 +45,18 @@ def ReadLaters(request):
 
 
 #View All News
-class Crime(ListView):
-    template_name = "News/News.htm"
-    paginate_by = 25
-    context_object_name = "News"
-    queryset = News.objects.all()
+def Crime(request):
+    category = CrimeCategory.objects.all()
+    sports = News.objects.all()
+    paginator = Paginator(sports, 5)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {
+        "Crime":sports,
+        "category":category,
+        "page_obj":page_obj
+    }
+    return render(request, "Crime/Crime.htm", context)
 
 #Viewing A particular News
 def CrimeView(request, title, headline, pk):
